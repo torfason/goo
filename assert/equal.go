@@ -27,6 +27,15 @@ func EqualInt(t testing.TB, have, want int, message ...string) {
 	}
 }
 
+// EqualBool asserts that two integers are equal.
+func EqualBool(t testing.TB, have, want bool, message ...string) {
+	t.Helper()
+	if have != want {
+		messageOut := strings.Join(message, "\n")
+		t.Errorf("%s\nhave: %v\nwant: %v", messageOut, have, want)
+	}
+}
+
 // EqualFloat asserts that two integers are equal.
 func EqualFloat64(t testing.TB, have, want float64, epsilon float64, message ...string) {
 	t.Helper()
