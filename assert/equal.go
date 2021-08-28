@@ -9,6 +9,24 @@ import (
 
 const Eps10 = 0.00000000001
 
+// True asserts that a condition is true
+func True(t testing.TB, have bool, message ...string) {
+	t.Helper()
+	if !have {
+		messageOut := strings.Join(message, "\n")
+		t.Errorf("%s\nhave: false\nwant: true", messageOut)
+	}
+}
+
+// False asserts that a condition is true
+func False(t testing.TB, have bool, message ...string) {
+	t.Helper()
+	if have {
+		messageOut := strings.Join(message, "\n")
+		t.Errorf("%s\nhave: true\nwant: false", messageOut)
+	}
+}
+
 // EqualString asserts that two strings are equal.
 func EqualString(t testing.TB, have, want string, message ...string) {
 	t.Helper()
