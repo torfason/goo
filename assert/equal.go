@@ -68,16 +68,27 @@ func EqualFloat64(t testing.TB, have, want float64, epsilon float64, message ...
 }
 
 // EqualSliceString asserts that two integer slices are equal.
-func EqualSlicesString(t testing.TB, have, want []string, message ...string) {
+func EqualSliceString(t testing.TB, have, want []string, message ...string) {
 	t.Helper()
 	if !reflect.DeepEqual(have, want) {
 		messageOut := strings.Join(message, "\n")
-		t.Errorf("%s\nhave: %v\nwant: %v", messageOut, have, want)
+		t.Errorf("%s\nhave: %v (len:%v)\nwant: %v (len:%v)",
+			messageOut, have, len(have), want, len(want))
 	}
 }
 
 // EqualSliceInt asserts that two integer slices are equal.
-func EqualSlicesInt(t testing.TB, have, want []int, message ...string) {
+func EqualSliceInt(t testing.TB, have, want []int, message ...string) {
+	t.Helper()
+	if !reflect.DeepEqual(have, want) {
+		messageOut := strings.Join(message, "\n")
+		t.Errorf("%s\nhave: %v (len:%v)\nwant: %v (len:%v)",
+			messageOut, have, len(have), want, len(want))
+	}
+}
+
+// EqualMapStringString asserts that two string->string maps are equal.
+func EqualMapStringString(t testing.TB, have, want map[string]string, message ...string) {
 	t.Helper()
 	if !reflect.DeepEqual(have, want) {
 		messageOut := strings.Join(message, "\n")
@@ -85,8 +96,8 @@ func EqualSlicesInt(t testing.TB, have, want []int, message ...string) {
 	}
 }
 
-// EqualMapsStringString asserts that two string->string maps are equal.
-func EqualMapsStringString(t testing.TB, have, want map[string]string, message ...string) {
+// EqualMapStringString asserts that two string->string maps are equal.
+func EqualMapStringBool(t testing.TB, have, want map[string]bool, message ...string) {
 	t.Helper()
 	if !reflect.DeepEqual(have, want) {
 		messageOut := strings.Join(message, "\n")
